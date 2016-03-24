@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -31,6 +34,13 @@ public class MaterialTutorialActivity extends AppCompatActivity implements Mater
     private ImageButton mNextButton;
     private Button mDoneButton;
     private MaterialTutorialPresenter materialTutorialPresenter;
+    private ImageView arrow1;
+    private ImageView arrow2;
+    private ImageView arrow3;
+    private ImageView arrow4;
+    private ImageView arrow5;
+    private android.os.Handler handler;
+    private static final int delay = 200;
 
     private View.OnClickListener finishTutorialClickListener = new View.OnClickListener() {
         @Override
@@ -74,7 +84,59 @@ public class MaterialTutorialActivity extends AppCompatActivity implements Mater
         });
         List<TutorialItem> tutorialItems = getIntent().getParcelableArrayListExtra(MATERIAL_TUTORIAL_ARG_TUTORIAL_ITEMS);
         materialTutorialPresenter.loadViewPagerFragments(tutorialItems);
+
+        arrow1 = (ImageView) findViewById(R.id.arrow_1);
+        arrow2 = (ImageView) findViewById(R.id.arrow_2);
+        arrow3 = (ImageView) findViewById(R.id.arrow_3);
+        arrow4 = (ImageView) findViewById(R.id.arrow_4);
+        arrow5 = (ImageView) findViewById(R.id.arrow_5);
+
+        handler = new android.os.Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+//                spring.setEndValue(1);
+                showArrow(arrow1);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        showArrow(arrow2);
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showArrow(arrow3);
+                            }
+                        }, delay);
+                    }
+                }, delay);
+            }
+        }, delay);
+
+
     }
+
+    private void showArrow(ImageView arrow) {
+        arrow.setVisibility(View.VISIBLE);
+        Animation expandIn = AnimationUtils.loadAnimation(MaterialTutorialActivity.this, R.anim.expand_in);
+        arrow.startAnimation(expandIn);
+    }
+
+    private void hideArrow(final ImageView arrow) {
+        Animation expandIn = AnimationUtils.loadAnimation(MaterialTutorialActivity.this, R.anim.expand_out);
+        arrow.startAnimation(expandIn);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrow.setVisibility(View.GONE);
+            }
+        }, delay);
+    }
+
 
     private void setStatusBarColor() {
         if (isFinishing()) {
@@ -135,6 +197,80 @@ public class MaterialTutorialActivity extends AppCompatActivity implements Mater
             @Override
             public void onPageSelected(int i) {
                 materialTutorialPresenter.onPageSelected(mHelpTutorialViewPager.getCurrentItem());
+
+                switch (i) {
+                    case 0: {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideArrow(arrow4);
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showArrow(arrow1);
+
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                showArrow(arrow2);
+
+                                                handler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        showArrow(arrow3);
+                                                    }
+                                                }, delay);
+                                            }
+                                        }, delay);
+
+                                    }
+                                }, delay);
+                            }
+                        }, delay);
+
+                        break;
+                    }
+
+                    case 1: {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideArrow(arrow1);
+                                hideArrow(arrow2);
+                                hideArrow(arrow3);
+                                hideArrow(arrow5);
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showArrow(arrow4);
+                                    }
+                                }, delay);
+                            }
+                        }, delay);
+
+                        break;
+                    }
+
+                    case 2: {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideArrow(arrow4);
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showArrow(arrow5);
+                                    }
+                                }, delay);
+                            }
+                        }, delay);
+
+                        break;
+                    }
+                }
 
             }
 

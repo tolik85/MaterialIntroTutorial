@@ -61,6 +61,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="280dip"
         android:layout_marginRight="100dip"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:weightSum="3">
 
@@ -79,6 +81,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="80dip"
         android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:paddingLeft="30dip">
 
         <ImageView

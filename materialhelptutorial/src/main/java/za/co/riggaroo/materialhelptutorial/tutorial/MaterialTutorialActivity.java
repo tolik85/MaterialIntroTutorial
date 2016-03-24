@@ -236,10 +236,14 @@ public class MaterialTutorialActivity extends AppCompatActivity implements Mater
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                hideArrow(arrow1);
-                                hideArrow(arrow2);
-                                hideArrow(arrow3);
-                                hideArrow(arrow5);
+
+                                if (arrow5.getVisibility() == View.VISIBLE)
+                                    hideArrow(arrow5);
+                                else {
+                                    hideArrow(arrow1);
+                                    hideArrow(arrow2);
+                                    hideArrow(arrow3);
+                                }
 
                                 handler.postDelayed(new Runnable() {
                                     @Override

@@ -17,7 +17,7 @@
         android:layout_marginTop="32dip"
         android:clipToPadding="false"></android.support.v4.view.ViewPager>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/arrows1_view"
         android:layout_width="wrap_content"
         android:layout_height="300dip"
@@ -92,7 +92,7 @@
             android:id="@+id/arrow_5"
             android:visibility="gone"
             android:src="@drawable/arrow_3" />
-    </LinearLayout>
+    </LinearLayout>-->
 
 
     <View

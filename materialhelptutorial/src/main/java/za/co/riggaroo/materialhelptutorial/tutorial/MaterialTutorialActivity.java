@@ -50,6 +50,13 @@ public class MaterialTutorialActivity extends AppCompatActivity implements Mater
         }
     };
 
+    public void  setSkipText (String skipText) {
+        mTextViewSkip.setText(skipText);
+    }
+
+    public void  setDoneText (String doneText) {
+        mDoneButton.setText(doneText);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
